@@ -31,11 +31,11 @@ public class User {
 
     private Long createdAt;
 
-    @ManyToMany(mappedBy = "users", fetch = FetchType.LAZY,
-            cascade = {
-                    CascadeType.PERSIST,
-                    CascadeType.MERGE
-            })
+    @ManyToMany(mappedBy = "users", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+//            cascade = {
+//                    CascadeType.PERSIST,
+//                    CascadeType.MERGE
+//            })
     @OrderBy("createdAt DESC")
     Set<Chat> chats = new HashSet<>();
 

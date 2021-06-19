@@ -32,11 +32,11 @@ public class Chat {
 
     private Long createdAt;
 
-    @ManyToMany(fetch = FetchType.LAZY,
-            cascade = {
-                    CascadeType.PERSIST,
-                    CascadeType.MERGE
-            })
+    @ManyToMany(fetch = FetchType.LAZY)
+//            cascade = {
+//                    CascadeType.PERSIST,
+//                    CascadeType.MERGE
+//            })
     @JoinTable(
             name = "users_chats",
             joinColumns = @JoinColumn(name = "chat_id"),
