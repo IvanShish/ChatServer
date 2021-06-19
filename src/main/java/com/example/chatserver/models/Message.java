@@ -34,4 +34,10 @@ public class Message {
     public void prePersist() {
         createdAt = System.currentTimeMillis();
     }
+
+    public Message(String chat, String author, String text) {
+        this.chat = chat;
+        this.author = author;
+        this.text = text;
+    }
 }

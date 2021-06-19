@@ -8,6 +8,7 @@ import org.hibernate.annotations.GenericGenerator;
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
+import java.util.HashSet;
 import java.util.Set;
 
 @Entity
@@ -30,12 +31,13 @@ public class User {
 
     private Long createdAt;
 
-    @ManyToMany
-    @JoinTable(
-            name = "users_chats",
-            joinColumns = @JoinColumn(name = "usert_id"),
-            inverseJoinColumns = @JoinColumn(name = "chat_id"))
-    Set<Chat> chats;
+    @ManyToMany(mappedBy = "users", fetch = FetchType.LAZY,
+            cascade = {
+                    CascadeType.PERSIST,
+                    CascadeType.MERGE
+            })
+    @OrderBy("createdAt DESC")
+    Set<Chat> chats = new HashSet<>();
 
     @PrePersist
     public void prePersist() {
