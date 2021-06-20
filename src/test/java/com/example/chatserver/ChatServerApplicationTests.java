@@ -99,7 +99,8 @@ class ChatServerApplicationTests {
         messageRequest.setAuthor(user1.getId());
         messageRequest.setText("hi");
 
-        Message message = new Message(messageRequest.getChat(), messageRequest.getAuthor(), messageRequest.getText());
+        Message message = new Message(chatRepository.getById(messageRequest.getChat()),
+                userRepository.getById(messageRequest.getAuthor()), messageRequest.getText());
         int sizeWas = messageRepository.findAll().size();
         messageRepository.save(message);
 

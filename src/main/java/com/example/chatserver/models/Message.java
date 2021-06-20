@@ -1,9 +1,12 @@
 package com.example.chatserver.models;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import org.hibernate.annotations.GenericGenerator;
+import org.hibernate.annotations.OnDelete;
+import org.hibernate.annotations.OnDeleteAction;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
@@ -19,13 +22,19 @@ public class Message {
     @GenericGenerator(name = "uuid2", strategy = "org.hibernate.id.UUIDGenerator")
     private String id;
 
-    @NotBlank(message = "Chat id is mandatory")
-    private String chat;
+    @ManyToOne(fetch = FetchType.LAZY, optional = false)
+    @JoinColumn(name = "chat", nullable = false)
+    @OnDelete(action = OnDeleteAction.CASCADE)
+    @JsonIgnore
+    private Chat chat;
 
-    @NotBlank(message = "Author id is mandatory")
-    private String author;
+    @ManyToOne(fetch = FetchType.LAZY, optional = false)
+    @JoinColumn(name = "author", nullable = false)
+    @OnDelete(action = OnDeleteAction.CASCADE)
+    @JsonIgnore
+    private User author;
 
-    @NotBlank(message = "Text is mandatory")
+    @NotBlank
     private String text;
 
     private Long createdAt;
@@ -35,7 +44,7 @@ public class Message {
         createdAt = System.currentTimeMillis();
     }
 
-    public Message(String chat, String author, String text) {
+    public Message(Chat chat, User author, String text) {
         this.chat = chat;
         this.author = author;
         this.text = text;

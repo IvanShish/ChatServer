@@ -1,5 +1,6 @@
 package com.example.chatserver.models;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -25,7 +26,7 @@ public class User {
     @GenericGenerator(name = "uuid2", strategy = "org.hibernate.id.UUIDGenerator")
     private String id;
 
-    @NotBlank(message = "Username is mandatory")
+    @NotBlank
     @Size(max = 20)
     private String username;
 

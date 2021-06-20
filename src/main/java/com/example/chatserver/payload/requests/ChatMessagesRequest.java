@@ -7,13 +7,7 @@ import javax.validation.constraints.NotBlank;
 
 @Getter
 @Setter
-public class MessageRequest {
+public class ChatMessagesRequest {
     @NotBlank
-    private String chat;
-
-    @NotBlank
-    private String author;
-
-    @NotBlank
-    private String text;
+    String chat;
 }

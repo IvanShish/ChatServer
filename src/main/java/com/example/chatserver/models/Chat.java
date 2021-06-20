@@ -26,17 +26,13 @@ public class Chat {
     @GenericGenerator(name = "uuid2", strategy = "org.hibernate.id.UUIDGenerator")
     private String id;
 
-    @NotBlank(message = "Chat name is mandatory")
+    @NotBlank
     @Size(max = 20)
     private String name;
 
     private Long createdAt;
 
     @ManyToMany(fetch = FetchType.LAZY)
-//            cascade = {
-//                    CascadeType.PERSIST,
-//                    CascadeType.MERGE
-//            })
     @JoinTable(
             name = "users_chats",
             joinColumns = @JoinColumn(name = "chat_id"),
