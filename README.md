@@ -120,4 +120,11 @@ curl --header "Content-Type: application/json" \
 
 ### Запуск
 
-Консоль базы данных: http://localhost:9000/h2-console
+Консоль базы данных H2: http://localhost:9000/h2-console
+
+Для запуска программы:
+
+```./gradlew build
+docker build --build-arg JAR_FILE="build/libs/*.jar" -t splitdemo/spring-boot-docker .
+docker run -p 9000:9000 splitdemo/spring-boot-docker
+```
