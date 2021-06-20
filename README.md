@@ -120,6 +120,8 @@ curl --header "Content-Type: application/json" \
 
 ### Запуск
 
+Java, Spring Boot, Hibernate, H2
+
 Консоль базы данных H2: http://localhost:9000/h2-console
 
 Для запуска программы:
