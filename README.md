@@ -124,7 +124,8 @@ curl --header "Content-Type: application/json" \
 
 Для запуска программы:
 
-```./gradlew build
+```
+./gradlew build
 docker build --build-arg JAR_FILE="build/libs/*.jar" -t splitdemo/spring-boot-docker .
 docker run -p 9000:9000 splitdemo/spring-boot-docker
 ```
