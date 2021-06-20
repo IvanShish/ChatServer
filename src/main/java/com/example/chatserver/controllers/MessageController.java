@@ -61,7 +61,7 @@ public class MessageController {
                 .orElseThrow(() -> new RuntimeException("Error: Chat is not found"));
 
         ChatMessagesResponse chatMessagesResponse = new ChatMessagesResponse();
-        Set<Message> messages = messageRepository.getAllByChat(chat.getId());
+        Set<Message> messages = messageRepository.getAllByChat(chat);
         chatMessagesResponse.setMessages(messages);
 
         return ResponseEntity.ok(chatMessagesResponse);
