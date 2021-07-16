@@ -63,13 +63,13 @@ class ChatServerApplicationTests {
 
         ChatRequest chatRequest = new ChatRequest();
         chatRequest.setName("chat_1");
-        Set<String> usersId = new HashSet<>();
+        Set<Long> usersId = new HashSet<>();
         usersId.add(user1.getId());
         usersId.add(user2.getId());
         chatRequest.setUsers(usersId);
 
         Set<User> users = new HashSet<>();
-        for (String id : usersId) {
+        for (Long id : usersId) {
             users.add(userRepository.getById(id));
         }
 

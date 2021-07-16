@@ -1,5 +1,6 @@
 package com.example.chatserver.controllers;
 
+import com.example.chatserver.exceptions.MyNotFoundException;
 import com.example.chatserver.models.Chat;
 import com.example.chatserver.models.User;
 import com.example.chatserver.payload.requests.ChatRequest;
@@ -43,7 +44,7 @@ public class ChatController {
                     .body(new MessageResponse("Error: Chat name is already taken!"));
         }
 
-        Set<String> usersId = chatRequest.getUsers();
+        Set<Long> usersId = chatRequest.getUsers();
         if (usersId.size() < 2) {
             return ResponseEntity
                     .badRequest()
@@ -54,9 +55,9 @@ public class ChatController {
         chat.setName(chatRequest.getName());
         Set<User> users = new HashSet<>();
 
-        for (String id : usersId) {
+        for (Long id : usersId) {
             User user = userRepository.findById(id)
-                    .orElseThrow(() -> new RuntimeException("Error: User is not found. Chat is not created"));
+                    .orElseThrow(() -> new MyNotFoundException("Error: User is not found. Chat is not created"));
             users.add(user);
         }
 
@@ -72,7 +73,7 @@ public class ChatController {
     @PostMapping("/get")
     public ResponseEntity<?> getUserChats(@Valid @RequestBody UserChatsRequest userChatsRequest) {
         User user = userRepository.findById(userChatsRequest.getUser())
-                .orElseThrow(() -> new RuntimeException("Error: User is not found."));
+                .orElseThrow(() -> new MyNotFoundException("Error: User is not found."));
 
         Set<Chat> chats = user.getChats();
         UserChatsResponse userChatsResponse = new UserChatsResponse();

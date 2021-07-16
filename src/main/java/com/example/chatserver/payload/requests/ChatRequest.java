@@ -14,5 +14,5 @@ public class ChatRequest {
     @Size(max = 20)
     private String name;
 
-    Set<String> users;
+    Set<Long> users;
 }

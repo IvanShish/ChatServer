@@ -8,11 +8,9 @@ import javax.validation.constraints.NotBlank;
 @Getter
 @Setter
 public class MessageRequest {
-    @NotBlank
-    private String chat;
+    private Long chat;
 
-    @NotBlank
-    private String author;
+    private Long author;
 
     @NotBlank
     private String text;

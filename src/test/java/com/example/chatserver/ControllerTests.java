@@ -118,7 +118,7 @@ public class ControllerTests {
     void newChatTest() {
         ChatRequest chat = new ChatRequest();
         chat.setName("new_chat_test");
-        Set<String> usersId = new HashSet<>();
+        Set<Long> usersId = new HashSet<>();
         usersId.add(userRepository.getByUsername("user_1").getId());
         usersId.add(userRepository.getByUsername("user_2").getId());
         chat.setUsers(usersId);
@@ -133,7 +133,7 @@ public class ControllerTests {
     void duplicateChatNameTest() {
         ChatRequest chat = new ChatRequest();
         chat.setName("duplicate_chat_name");
-        Set<String> usersId = new HashSet<>();
+        Set<Long> usersId = new HashSet<>();
         usersId.add(userRepository.getByUsername("user_1").getId());
         usersId.add(userRepository.getByUsername("user_2").getId());
         chat.setUsers(usersId);
@@ -143,7 +143,7 @@ public class ControllerTests {
 
         ChatRequest chat2 = new ChatRequest();
         chat2.setName("duplicate_chat_name");
-        Set<String> usersId2 = new HashSet<>();
+        Set<Long> usersId2 = new HashSet<>();
         usersId2.add(userRepository.getByUsername("user_1").getId());
         usersId2.add(userRepository.getByUsername("user_2").getId());
         chat2.setUsers(usersId2);
@@ -163,7 +163,7 @@ public class ControllerTests {
 
         ChatRequest chat = new ChatRequest();
         chat.setName("chat_name");
-        Set<String> usersId = new HashSet<>();
+        Set<Long> usersId = new HashSet<>();
         usersId.add(userRepository.getByUsername(user1.getUsername()).getId());
         usersId.add(userRepository.getByUsername(user2.getUsername()).getId());
         chat.setUsers(usersId);
@@ -177,7 +177,7 @@ public class ControllerTests {
     void newMessageTest() {
         ChatRequest chat = new ChatRequest();
         chat.setName("new_message_test");
-        Set<String> usersId = new HashSet<>();
+        Set<Long> usersId = new HashSet<>();
         usersId.add(userRepository.getByUsername("user_1").getId());
         usersId.add(userRepository.getByUsername("user_2").getId());
         chat.setUsers(usersId);
@@ -185,7 +185,7 @@ public class ControllerTests {
 
         MessageRequest messageRequest = new MessageRequest();
         messageRequest.setText("hi");
-        messageRequest.setChat(chatRepository.getByName(chat.getName()).getId());
+        messageRequest.setChat(chatRepository.getByName("new_message_test").getId());
         messageRequest.setAuthor(userRepository.getByUsername("user_1").getId());
 
         int sizeWas = messageRepository.findAll().size();
